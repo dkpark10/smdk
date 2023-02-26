@@ -6,8 +6,8 @@
   "author": "dkpark10",
   "license": "MIT",
   "scripts": {
-    "server:start": "node dist/app.js",
-    "server:dev": "nodemon src/app.ts",
+    "server:start": "node dist/server.js",
+    "server:dev": "nodemon src/server.ts",
     "server:build": "tsc -p ."
   },
   "dependencies": {
