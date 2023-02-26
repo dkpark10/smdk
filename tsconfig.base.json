@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES5", // 컴파일 후 변환될 es버전
-    "module": "CommonJS",   // 모듈 문법
+    "target": "es5", // 컴파일 후 변환될 es버전
+    "module": "esnext", // 모듈 문법
     "moduleResolution": "node",
-    "rootDir": "./src",   // 컴파일할 대상 root 지정
     "noResolve": false,
-    "removeComments": true,
+    "removeComments": true, // 주석 제거 여부
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "keyofStringsOnly": true,
@@ -20,19 +19,10 @@
     "noImplicitThis": true, //this 가 any 여부에 따라 에러,
     "noUnusedLocals": true, // 미사용 지역변수 에러
     "noUnusedParameters": true, //미사용 파라미터 에러
-    "baseUrl": "./",
-    "esModuleInterop": true,
-    "paths": {
-      "@server/*": ["./src/*"],
-    }
   },
   "exclude": [
     "./node_modules/**/*",
     "./dist",
     "./__test__/**/*"
   ],
-  "include": [
-    "./src/**/*",
-    "@types"
-  ]
 }
