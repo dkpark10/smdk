@@ -1,4 +1,4 @@
-import { appendFileSync } from "fs";
+import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import { faker } from "@faker-js/faker";
 import path from "path";
 
@@ -27,7 +27,7 @@ const getChatDate = () => {
   const hour = addPrefixZero(new Date().getHours());
   const minute = addPrefixZero(new Date().getMinutes());
 
-  return `${checkAfternoon(hour)}: ${hour}:${minute}`;
+  return `${checkAfternoon(hour)} ${hour}:${minute}`;
 }
 
 (function () {
@@ -41,5 +41,11 @@ const getChatDate = () => {
     });
   }
 
-  appendFileSync(path.join(__dirname, 'src/mock/chat_mock.json'), JSON.stringify(newChat));
+  const mockFilePath = path.join(__dirname, 'src/mock/chat_mock.json');
+  const prevChatLog = JSON.parse(readFileSync(mockFilePath, 'utf-8'));
+  const newChatLog = {
+    chatLog:  [...prevChatLog.chatLog, ...newChat],
+  }; 
+
+  writeFileSync(path.join(__dirname, 'src/mock/chat_mock.json'), JSON.stringify(newChatLog));
 })();
