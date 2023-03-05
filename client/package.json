@@ -23,6 +23,7 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "msw": "^1.1.0"
   }
 }
