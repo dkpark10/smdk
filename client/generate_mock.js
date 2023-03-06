@@ -1,4 +1,4 @@
-import { appendFileSync, readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { faker } from "@faker-js/faker";
 import path from "path";
 
@@ -8,7 +8,7 @@ const __dirname = path.resolve();
  * @param {number} value 
  * @return {string}
  */
-const addPrefixZero = (value) => {
+export const addPrefixZero = (value) => {
   return value < 10 ? `0${value}` : String(value);
 }
 
@@ -16,21 +16,22 @@ const addPrefixZero = (value) => {
  * @param {string} hour 
  * @return {string}
  */
-const checkAfternoon = (hour) => {
+export const checkAfternoon = (hour) => {
   return hour >= 12 ? '오후' : '오전';
 }
 
 /**
  * @return {string}
+ * @todo moment 라이브러리로 이전하기
  */
-const getChatDate = () => {
+export const getChatDate = () => {
   const hour = addPrefixZero(new Date().getHours());
   const minute = addPrefixZero(new Date().getMinutes());
 
   return `${checkAfternoon(hour)} ${hour}:${minute}`;
 }
 
-(function () {
+export const generateMock = () => {
   const COUNT_CREATED_CHAT = 20;
   const newChat = [];
 
@@ -41,11 +42,13 @@ const getChatDate = () => {
     });
   }
 
-  const mockFilePath = path.join(__dirname, 'src/mock/chat_mock.json');
+  const mockFilePath = path.join(__dirname, 'src/mock/mock_assets/chat_mock.json');
   const prevChatLog = JSON.parse(readFileSync(mockFilePath, 'utf-8'));
   const newChatLog = {
     chatLog:  [...prevChatLog.chatLog, ...newChat],
   }; 
 
-  writeFileSync(path.join(__dirname, 'src/mock/chat_mock.json'), JSON.stringify(newChatLog));
-})();
+  writeFileSync(path.join(__dirname, 'src/mock/mock_assets/chat_mock.json'), JSON.stringify(newChatLog));
+}
+
+generateMock();
