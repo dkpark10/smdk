@@ -6,6 +6,7 @@
  * @see https://github.com/mswjs/msw
  * - Please do NOT modify this file.
  * - Please do NOT serve this file on production.
+ * @description 절대 이 코드 건드리지 마시옹!!!
  */
 
 const INTEGRITY_CHECKSUM = '3d6b9f06410d179a7f7404d4bf4c3c70'
