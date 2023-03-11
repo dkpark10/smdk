@@ -19,7 +19,7 @@ export const instance = axios.create({
   withCredentials: true,
 });
 
-export const httpClient: HttpClient = {
+export const fetchClient: HttpClient = {
   async get<T>(url: string, config?: RequestConfig): Promise<T> {
     return instance.get(url, config);
   },
