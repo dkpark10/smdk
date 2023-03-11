@@ -2,7 +2,7 @@ import redis from 'redis';
 
 const redisClient = redis.createClient();
 
-export const getRedisValue = (key: string) => {
+export const getRedisValue = (key: string): Promise<string | null> => {
   return new Promise((resolve, reject) => {
     redisClient.get(key, (err, data) => {
       if (err) {
