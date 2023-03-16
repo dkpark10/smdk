@@ -5,7 +5,7 @@ export type MyResponses<T> = AxiosResponse<T>;
 export type MethodName = 'get' | 'post' | 'patch' | 'delete' | 'put';
 
 export type HttpClient = {
-  [M in MethodName]: <T>(url:string, ...rest: any[]) => Promise<T>;
+  [M in MethodName]: <T>(url: string, ...rest: any[]) => Promise<AxiosResponse<T>>;
 };
 
 export type RequestConfig = AxiosRequestConfig;
@@ -20,23 +20,23 @@ export const instance = axios.create({
 });
 
 export const fetchClient: HttpClient = {
-  async get<T>(url: string, config?: RequestConfig): Promise<T> {
-    return instance.get(url, config);
+  get<T>(url: string, config?: RequestConfig) {
+    return instance.get<T>(url, config);
   },
 
-  async post<T, D>(url: string, data?: D, config?: RequestConfig): Promise<T> {
-    return instance.post(url, data, config);
+  post<T, D>(url: string, data?: D, config?: RequestConfig) {
+    return instance.post<T>(url, data, config);
   },
 
-  async patch<T, D>(url: string, data?: D, config?: RequestConfig): Promise<T> {
-    return instance.patch(url, data, config);
+  patch<T, D>(url: string, data?: D, config?: RequestConfig) {
+    return instance.patch<T>(url, data, config);
   },
 
-  async delete<T>(url: string, config?: RequestConfig): Promise<T> {
-    return instance.delete(url, config);
+  delete<T>(url: string, config?: RequestConfig) {
+    return instance.delete<T>(url, config);
   },
 
-  async put<T, D>(url: string, data?: D, config?: RequestConfig): Promise<T> {
-    return instance.put(url, data, config);
+  put<T, D>(url: string, data?: D, config?: RequestConfig) {
+    return instance.put<T>(url, data, config);
   },
 };
