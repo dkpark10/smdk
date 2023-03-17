@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enalbed") {
   import('../mock');
 }
 

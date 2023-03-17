@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 interface Props {
-  data: string;
+  content: string;
 }
 
-export default function Home({ data }: Props) {
+export default function Home({ content = "123" }: Props) {
   const [chatContent, setChatContent] = useState("");
 
   const onChangeChat = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,6 @@ export default function Home({ data }: Props) {
   const onSendChat = () => {
     chatContent;
   };
-  console.log(typeof window, 22);
 
   return (
     <>
@@ -30,19 +29,19 @@ export default function Home({ data }: Props) {
       <main>
         <input type="text" onChange={onChangeChat}></input>
         <button onClick={onSendChat}>보내기</button>
-        <div>{ data }</div>
+        <div>{ content }</div>
       </main>
     </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { data } = await axios.get("http://localhost:3000/api/hello");
-  console.log(typeof window, 11);
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const { data } = await axios.get("http://api.test.com:8080/test");
+//   console.log(typeof window, "is server??");
 
-  return {
-    props: {
-      data: data.name,
-    },
-  };
-};
+//   return {
+//     props: {
+//       data: data.content,
+//     },
+//   };
+// };
