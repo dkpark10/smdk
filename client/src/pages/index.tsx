@@ -7,7 +7,7 @@ interface Props {
   content: string;
 }
 
-export default function Home({ content = "123" }: Props) {
+export default function Home({ content }: Props) {
   const [chatContent, setChatContent] = useState("");
 
   const onChangeChat = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +35,13 @@ export default function Home({ content = "123" }: Props) {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const { data } = await axios.get("http://api.test.com:8080/test");
-//   console.log(typeof window, "is server??");
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data } = await axios.get("/test");
+  console.log(data);
 
-//   return {
-//     props: {
-//       data: data.content,
-//     },
-//   };
-// };
+  return {
+    props: {
+      content: data.content,
+    },
+  };
+};
