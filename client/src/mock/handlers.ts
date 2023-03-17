@@ -6,7 +6,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(chatMock));
   }),
 
-  rest.post("/chat", (req, res, ctx) => {
-    return res(ctx.status(201));
-  })
+  rest.get("http://test.api.com:8080/king", (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ content: "test" }));
+  }),
 ];

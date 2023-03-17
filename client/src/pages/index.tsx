@@ -1,7 +1,13 @@
+import type { GetServerSideProps } from 'next';
 import Head from 'next/head'
 import React, { useState } from 'react';
+import axios from "axios";
 
-export default function Home() {
+interface Props {
+  data: string;
+}
+
+export default function Home({ data }: Props) {
   const [chatContent, setChatContent] = useState("");
 
   const onChangeChat = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +17,7 @@ export default function Home() {
   const onSendChat = () => {
     chatContent;
   };
+  console.log(typeof window, 22);
 
   return (
     <>
@@ -23,7 +30,19 @@ export default function Home() {
       <main>
         <input type="text" onChange={onChangeChat}></input>
         <button onClick={onSendChat}>보내기</button>
+        <div>{ data }</div>
       </main>
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data } = await axios.get("http://localhost:3000/api/hello");
+  console.log(typeof window, 11);
+
+  return {
+    props: {
+      data: data.name,
+    },
+  };
+};
