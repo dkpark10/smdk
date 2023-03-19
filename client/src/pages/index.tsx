@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head'
 import React, { useState } from 'react';
-import axios from "axios";
+import { fetchClient } from '@/utils/fetchclient';
 
 interface Props {
   content: string;
@@ -36,8 +36,7 @@ export default function Home({ content }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data } = await axios.get("/test");
-  console.log(data);
+  const { data } = await fetchClient.get<Props>('/test');
 
   return {
     props: {

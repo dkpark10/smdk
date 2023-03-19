@@ -11,7 +11,7 @@ export type HttpClient = {
 export type RequestConfig = AxiosRequestConfig;
 
 export const instance = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: process.env.BASE_URL,
   headers: {
     'Content-type': 'application/json',
     Accept: 'application/json',
