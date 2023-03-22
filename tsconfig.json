@@ -20,6 +20,9 @@
     "noUnusedLocals": true, // 미사용 지역변수 에러
     "noUnusedParameters": true, //미사용 파라미터 에러
   },
+  // "include": [
+  //   "@types"
+  // ],
   "exclude": [
     "./node_modules/**/*",
     "./dist",

@@ -1,5 +1,3 @@
-import { useFetchQuery } from "./queryfetch";
+import { useFetchQuery } from './queryfetch';
 
-export {
-  useFetchQuery,
-};
+export { useFetchQuery };

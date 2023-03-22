@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import Head from 'next/head'
+import Head from 'next/head';
 import React, { useState } from 'react';
 import { fetchClient } from '@/utils/fetchclient';
 
@@ -8,14 +8,14 @@ interface Props {
 }
 
 export default function Home({ content }: Props) {
-  const [chatContent, setChatContent] = useState("");
+  const [chatContent, setChatContent] = useState('');
 
   const onChangeChat = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChatContent(e.target.value);
   };
 
   const onSendChat = () => {
-    chatContent;
+    //
   };
 
   return (
@@ -27,9 +27,11 @@ export default function Home({ content }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <input type="text" onChange={onChangeChat}></input>
-        <button onClick={onSendChat}>보내기</button>
-        <div>{ content }</div>
+        <input type="text" onChange={onChangeChat} />
+        <button type="button" onClick={onSendChat}>
+          보내기
+        </button>
+        <div>{content}</div>
       </main>
     </>
   )
