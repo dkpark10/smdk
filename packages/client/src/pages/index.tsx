@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import React, { useState } from 'react';
-import { fetchClient } from '@/utils/fetchclient';
+import { fetchClient } from '@/utils';
 
 interface Props {
   content: string;
@@ -34,7 +34,7 @@ export default function Home({ content }: Props) {
         <div>{content}</div>
       </main>
     </>
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {

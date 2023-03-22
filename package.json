@@ -5,8 +5,8 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "client",
-      "server"
+      "packages/server",
+      "packages/client"
     ]
   },
   "packageManager": "yarn@3.4.1"
