@@ -1,4 +1,5 @@
-(async function () {
+/* eslint-disable @typescript-eslint/no-floating-promises */
+(async function mockServerStart() {
   if (typeof window === 'undefined') {
     const { server } = await import('./server');
     server.listen();

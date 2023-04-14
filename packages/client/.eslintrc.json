@@ -1,5 +1,4 @@
 {
-  "root": true,
   "env": {
     "browser": true,
     "es6": true,
@@ -12,11 +11,12 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": "./packages/client/tsconfig.json"
   },
   "ignorePatterns": [
     "*.config.js",
-    "jest.*"
+    "jest.*",
+    "scripts/*"
   ],
   "extends": [
     "next",

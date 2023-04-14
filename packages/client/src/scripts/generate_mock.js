@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import { faker } from "@faker-js/faker";
 import path from "path";
+import moment from "moment";
 
 const __dirname = path.resolve();
 
@@ -38,7 +39,7 @@ export const generateMock = () => {
   for (let i = 0; i < COUNT_CREATED_CHAT; i += 1) {
     newChat.push({
       content: faker.datatype.uuid(),
-      date: getChatDate(),
+      sendDate: getChatDate(),
     });
   }
 
