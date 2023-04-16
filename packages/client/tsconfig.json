@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/fetclientts", "src/utils/fetclientts", "@types", "src/scripts/generate_mock.js", "src/scripts/generate_mock.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/fetclientts", "src/utils/fetclientts", "@types", "../../scripts/generate_mock.js", "../../scripts/generate_mock.js"],
   "exclude": ["node_modules"]
 }

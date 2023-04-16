@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5", // 컴파일 후 변환될 es버전
-    "module": "esnext", // 모듈 문법
+    "module": "CommonJS", // 모듈 문법
     "moduleResolution": "node",
     "noResolve": false,
     "removeComments": true, // 주석 제거 여부
@@ -9,6 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "keyofStringsOnly": true,
     "strict": true,
+    "esModuleInterop": true,
     "outDir": "./dist/app",
     "allowJs": false, // js 파일들 import 할 지 여부 
     "noImplicitReturns": true, // 함수내 모든 경로에서 리턴하지 않을경우 에러
