@@ -16,7 +16,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "@types",
+    "../../@types",
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "./node_modules/**/*",
+    "./dist",
+    "./__test__/**/*"
+  ],
 }

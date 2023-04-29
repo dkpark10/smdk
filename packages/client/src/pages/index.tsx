@@ -15,11 +15,12 @@ export default function Home({ content }: Props) {
   };
 
   const onSendChat = (n: number, s: string, b: boolean) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(process.env.testKey);
     //
   };
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8081');
+    const socket = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
     socket.onopen = () => {
       console.log('Connected');
       socket.send(
@@ -29,7 +30,7 @@ export default function Home({ content }: Props) {
         }),
       );
       socket.onmessage = ({ data }) => {
-        console.log("123", data);
+        console.log('123', data);
       };
     };
   }, []);

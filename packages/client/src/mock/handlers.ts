@@ -6,7 +6,7 @@ export const handlers = [
     return res(ctx.status(200), ctx.json(chatMock));
   }),
 
-  rest.get(`${process.env.NEXT_PUBLIC_BASE_URL as string}/test`, (_, res, ctx) => {
+  rest.get(`${process.env.NEXT_PUBLIC_BASE_URL}/test`, (_, res, ctx) => {
     return res(ctx.status(200), ctx.json({ content: 'test' }));
   }),
 ];
