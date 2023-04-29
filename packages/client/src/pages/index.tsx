@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchClient } from '@/utils';
 
 interface Props {
@@ -17,6 +17,22 @@ export default function Home({ content }: Props) {
   const onSendChat = (n: number, s: string, b: boolean) => (e: React.ChangeEvent<HTMLInputElement>) => {
     //
   };
+
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:8081');
+    socket.onopen = () => {
+      console.log('Connected');
+      socket.send(
+        JSON.stringify({
+          event: 'events',
+          data: 'open message',
+        }),
+      );
+      socket.onmessage = ({ data }) => {
+        console.log("123", data);
+      };
+    };
+  }, []);
 
   return (
     <>
