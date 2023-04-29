@@ -4,5 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/server/.env*
+/server-node/.env*
+/server-nest/.env*
 /client/.env*

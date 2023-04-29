@@ -64,7 +64,7 @@ export const parsingDate = (date:string) => {
   };
 };
 
-(function () {
+(async function () {
   const COUNT_CREATED_CHAT = 20;
   const newChat: ChatData[] = [];
   const chatDataPath = "packages/client/src/mock/mock_assets/chat_mock.json";
