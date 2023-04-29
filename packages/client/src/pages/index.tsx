@@ -37,8 +37,6 @@ export default function Home({ content }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data } = await fetchClient.get<Props>('/test');
-  // const result = await fetch(`${process.env.BASE_URL}/test`);
-  // const data = result.json() as unknown as Props;
 
   return {
     props: {
