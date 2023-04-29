@@ -7,3 +7,6 @@
 /server-node/.env*
 /server-nest/.env*
 /client/.env*
+/server-node/node_modules
+/server-nest/node_modules
+/client/node_modules
