@@ -14,7 +14,7 @@ export default function Home({ content }: Props) {
     setChatContent(e.target.value);
   };
 
-  const onSendChat = () => {
+  const onSendChat = (n: number, s: string, b: boolean) => (e: React.ChangeEvent<HTMLInputElement>) => {
     //
   };
 
@@ -28,9 +28,7 @@ export default function Home({ content }: Props) {
       </Head>
       <main>
         <input type="text" onChange={onChangeChat} />
-        <button type="button" onClick={onSendChat}>
-          보내기
-        </button>
+        <button type="button">보내기</button>
         <div>{content}</div>
       </main>
     </>
