@@ -1,11 +1,9 @@
 import Head from 'next/head';
 import React from 'react';
 import { Center, Input, Stack, Container, Box, HStack, Text, Heading } from '@chakra-ui/react';
-import { MAIN_COLOR } from '@/theme';
+import Heart from '@/components/heart';
 
 export default function Index() {
-  const heartSize = 21;
-
   return (
     <>
       <Head>
@@ -20,15 +18,7 @@ export default function Index() {
         <Box w="100vw" h="100vh">
           <Center>
             <HStack>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={heartSize}
-                height={heartSize}
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path fill={MAIN_COLOR} d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-              </svg>
+              <Heart />
               <Heading as="h1" size="2xl">
                 smdk
               </Heading>

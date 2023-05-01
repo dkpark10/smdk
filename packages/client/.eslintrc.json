@@ -43,7 +43,8 @@
         "tsx": "never",
         "ts": "never",
         "js": "never",
-        "jsx": "never"
+        "jsx": "never",
+        "json": "never"
       }
     ],
     "react/react-in-jsx-scope": "off",
