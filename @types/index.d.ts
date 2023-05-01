@@ -8,3 +8,8 @@ declare namespace NodeJS {
     NEXT_PUBLIC_BASE_URL: string;
   }
 }
+
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.otf';

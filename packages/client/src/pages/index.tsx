@@ -1,8 +1,92 @@
 import Head from 'next/head';
 import React from 'react';
-import { Center, Input, Stack, Container, Box, Text, Heading } from '@chakra-ui/react';
+import { Center, Input, Stack, Container, Box, HStack, Text, Heading } from '@chakra-ui/react';
+import { Global } from '@emotion/react';
+import { MAIN_COLOR } from '@/theme';
+
+function FontFace() {
+  return (
+    <style jsx global>
+      {`
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 100;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 200;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 300;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 400;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 500;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 600;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 700;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 800;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+
+        @font-face {
+          font-family: 'Inter';
+          font-style: normal;
+          font-weight: 900;
+          font-display: block;
+          src: url(/fonts/Inter.woff2) format('woff2');
+        }
+      `}
+    </style>
+  );
+}
 
 export default function Index() {
+  const heartSize = 21;
+
   return (
     <>
       <Head>
@@ -12,19 +96,29 @@ export default function Index() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,200&display=swap" rel="stylesheet" />
       </Head>
       <main>
-        <Box bgColor="primary" w="100vw" h="100vh">
+        <Box w="100vw" h="100vh">
           <Center>
-            <Heading as='h1' size='3xl' color="white">
-              SMDK
-            </Heading>
+            <HStack>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={heartSize}
+                height={heartSize}
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path fill={MAIN_COLOR} d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+              </svg>
+              <Heading as="h1" size="2xl">
+                SMDK
+              </Heading>
+            </HStack>
           </Center>
           <Center>
             <Stack spacing={3} w="80%">
-              <Input placeholder="아이디" bgColor="white" />
-              <Input placeholder="비밀번호" bgColor="white" type="password" />
+              <Input variant="flushed" placeholder="아이디" focusBorderColor="primary" />
+              <Input variant="flushed" placeholder="비밀번호" type="password" focusBorderColor="primary" />
             </Stack>
           </Center>
         </Box>
