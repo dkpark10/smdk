@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-import { Center, Input, Stack, Container, Box, HStack, Text, Heading } from '@chakra-ui/react';
+import { Center, Input, Stack, Box, HStack, Heading, Button, FormControl } from '@chakra-ui/react';
 import Heart from '@/components/heart';
 
 export default function Index() {
@@ -16,7 +16,7 @@ export default function Index() {
       </Head>
       <main>
         <Box w="100vw" h="100vh">
-          <Center>
+          <Center h="22vh">
             <HStack>
               <Heart />
               <Heading as="h1" size="2xl">
@@ -24,12 +24,26 @@ export default function Index() {
               </Heading>
             </HStack>
           </Center>
-          <Center>
-            <Stack spacing={3} w="80%">
-              <Input variant="flushed" placeholder="아이디" focusBorderColor="primary" />
-              <Input variant="flushed" placeholder="비밀번호" type="password" focusBorderColor="primary" />
-            </Stack>
-          </Center>
+          <FormControl as="form">
+            <Center>
+              <Stack spacing={3} w="80%">
+                <Input variant="flushed" placeholder="아이디" id="id" focusBorderColor="primary" />
+                <Input
+                  variant="flushed"
+                  placeholder="비밀번호"
+                  id="pwd"
+                  type="password"
+                  focusBorderColor="primary"
+                  autoComplete="off"
+                />
+                <Box>
+                  <Button mt={7} w="100%">
+                    로그인
+                  </Button>
+                </Box>
+              </Stack>
+            </Center>
+          </FormControl>
         </Box>
       </main>
     </>
