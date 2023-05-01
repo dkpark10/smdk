@@ -13,11 +13,6 @@
     "sourceType": "module",
     "project": "./packages/client/tsconfig.json"
   },
-  "ignorePatterns": [
-    "*.config.js",
-    "jest.*",
-    "scripts/*"
-  ],
   "extends": [
     "next",
     "next/core-web-vitals",
@@ -45,6 +40,14 @@
         "js": "never",
         "jsx": "never",
         "json": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "off",
+      {
+        "devDependencies": [
+          "mock/**/*"
+        ]
       }
     ],
     "react/react-in-jsx-scope": "off",

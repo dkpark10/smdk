@@ -7,7 +7,7 @@ import { Global } from '@emotion/react';
 import { theme, FONT_FAMILY_BODY, FONT_FAMILY_HEAD } from '@/theme';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enalbed') {
-  import('../mock');
+  import('../../__mock__');
 }
 
 const queryClient = new QueryClient();

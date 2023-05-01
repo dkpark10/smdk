@@ -1,0 +1,5 @@
+*.config.js
+jest.*
+scripts/*
+mock/**/*
+test/**/*
