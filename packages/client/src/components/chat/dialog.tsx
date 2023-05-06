@@ -1,15 +1,10 @@
 import { Badge } from '@chakra-ui/react';
+import { ChatData } from 'chat-type';
 
-interface DialogProps {
-  content: string;
-  isSender: boolean;
-  date: string;
-}
-
-export default function Dialog({ content, isSender, date }: DialogProps) {
+export default function Dialog({ content, isSender, fullDate }: ChatData) {
   return (
     <Badge>
-      {content} {date}
+      {content} {fullDate}
     </Badge>
   );
 }
