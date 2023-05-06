@@ -1,9 +1,18 @@
 import Head from 'next/head';
-import React from 'react';
-import { Center, Input, Stack, Box, HStack, Heading, Button, FormControl } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+import React, { useState } from 'react';
+import { Center, Input, Stack, Box, HStack, Heading, Button } from '@chakra-ui/react';
 import Heart from '@/components/heart';
 
+const Chat = dynamic(() => import('@/components/chat'));
+
 export default function Index() {
+  const [isLogin, setIsLogin] = useState(false);
+
+  const onSubmit = () => {
+    setIsLogin(true);
+  };
+
   return (
     <>
       <Head>
@@ -14,38 +23,42 @@ export default function Index() {
         <link rel="preload" href="fonts/NotoSansKR-Light.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="fonts/Inter-Light.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </Head>
-      <main>
-        <Box w="100vw" h="100vh">
-          <Center h="22vh">
-            <HStack>
-              <Heart />
-              <Heading as="h1" size="2xl">
-                smdk
-              </Heading>
-            </HStack>
-          </Center>
-          <FormControl as="form">
-            <Center>
-              <Stack spacing={3} w="80%">
-                <Input variant="flushed" placeholder="아이디" id="id" focusBorderColor="primary" />
-                <Input
-                  variant="flushed"
-                  placeholder="비밀번호"
-                  id="pwd"
-                  type="password"
-                  focusBorderColor="primary"
-                  autoComplete="off"
-                />
-                <Box>
-                  <Button mt={7} w="100%">
-                    로그인
-                  </Button>
-                </Box>
-              </Stack>
+      {!isLogin ? (
+        <main>
+          <Box w="100vw" h="100vh">
+            <Center h="22vh">
+              <HStack>
+                <Heart />
+                <Heading as="h1" size="2xl">
+                  smdk
+                </Heading>
+              </HStack>
             </Center>
-          </FormControl>
-        </Box>
-      </main>
+            <form onSubmit={onSubmit}>
+              <Center>
+                <Stack spacing={3} w="80%">
+                  <Input variant="flushed" placeholder="아이디" id="id" focusBorderColor="primary" />
+                  <Input
+                    variant="flushed"
+                    placeholder="비밀번호"
+                    id="pwd"
+                    type="password"
+                    focusBorderColor="primary"
+                    autoComplete="off"
+                  />
+                  <Box>
+                    <Button type="submit" mt={7} w="100%">
+                      로그인
+                    </Button>
+                  </Box>
+                </Stack>
+              </Center>
+            </form>
+          </Box>
+        </main>
+      ) : (
+        <Chat />
+      )}
     </>
   );
 }
