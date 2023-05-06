@@ -1,4 +1,4 @@
-import { extendTheme, defineStyleConfig, theme as base } from '@chakra-ui/react';
+import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
 
 export const MAIN_COLOR = '#eb4675';
 

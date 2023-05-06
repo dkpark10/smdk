@@ -11,8 +11,8 @@ const animation = `${moveTopFromBottom} 0.5s ease-in-out`;
 
 export default function BottomToTop({ children }: BottomToTopProps) {
   return (
-    <Box h="100vh" position="relative">
-      <Box w="100%" h="100%" position="absolute" as={motion.div} animation={animation} top="0%">
+    <Box h="100vh" position="relative" bgColor="gray.200">
+      <Box w="100%" h="100%" position="absolute" as={motion.div} animation={animation} top="0%" bgColor="white">
         {children}
       </Box>
     </Box>

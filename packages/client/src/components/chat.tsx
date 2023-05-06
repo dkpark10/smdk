@@ -1,10 +1,10 @@
 import { Center, Box } from '@chakra-ui/react';
-import { BottomToTop } from '@/components/common';
+import { Styles } from '@/components/common';
 
 export default function Chat() {
   return (
-    <BottomToTop>
+    <Styles.AniBottomToTop>
       <Center border="1px solid blue">여긴 채팅</Center>
-    </BottomToTop>
+    </Styles.AniBottomToTop>
   );
 }

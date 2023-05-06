@@ -2,7 +2,7 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { Center, Input, Stack, Box, HStack, Heading, Button } from '@chakra-ui/react';
-import Heart from '@/components/heart';
+import { Styles } from '@/components/common';
 
 const Chat = dynamic(() => import('@/components/chat'));
 
@@ -28,7 +28,7 @@ export default function Index() {
           <Box w="100vw" h="100vh">
             <Center h="22vh">
               <HStack>
-                <Heart />
+                <Styles.Heart />
                 <Heading as="h1" size="2xl">
                   smdk
                 </Heading>
