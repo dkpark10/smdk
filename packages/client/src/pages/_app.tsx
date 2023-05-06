@@ -4,14 +4,20 @@ import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme, FONT_FAMILY_BODY, FONT_FAMILY_HEAD } from '@/theme';
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enalbed') {
   import('../../mock');
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: process.env.NODE_ENV === 'development' ? 0 : 3,
+    },
+  },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

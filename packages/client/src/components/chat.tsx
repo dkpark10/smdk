@@ -1,15 +1,17 @@
-import { Center } from '@chakra-ui/react';
-import { useQuery } from '@tanstack/react-query';
+/* eslint-disable react/no-array-index-key */
+import { useFetchChat } from '@/services/usefetch-chat';
 import { Styles } from '@/components/common';
-import { fetchClient } from '@/utils';
+import Dialog from '@/components/chat/dialog';
 
 export default function Chat() {
-  const { data } = useQuery(['chat'], () => fetchClient.get('/api/chat'));
-  console.log(data);
+  const { data: chatData } = useFetchChat();
 
   return (
     <Styles.AniBottomToTop>
-      <Center border="1px solid blue">여긴 채팅</Center>
+      {chatData?.map(({ content, isSender, fullDate }, idx) => (
+        <Dialog key={`${content}-${idx}`} content={content} isSender={isSender} fullDate={fullDate} />
+      ))}
+      <h2>222</h2>
     </Styles.AniBottomToTop>
   );
 }

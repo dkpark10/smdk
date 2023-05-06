@@ -2,11 +2,16 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { Center, Input, Stack, Box, HStack, Heading, Button } from '@chakra-ui/react';
+// import { ErrorBoundary } from 'react-error-boundary';
+import { useQueryErrorResetBoundary } from '@tanstack/react-query';
+import { ErrorBoundary } from '@/components/error';
 import { Styles } from '@/components/common';
 
 const Chat = dynamic(() => import('@/components/chat'));
 
 export default function Index() {
+  const { reset } = useQueryErrorResetBoundary();
+
   const [isLogin, setIsLogin] = useState(false);
 
   const onSubmit = () => {
@@ -57,7 +62,9 @@ export default function Index() {
           </Box>
         </main>
       ) : (
-        <Chat />
+        <ErrorBoundary>
+          <Chat />
+        </ErrorBoundary>
       )}
     </>
   );
