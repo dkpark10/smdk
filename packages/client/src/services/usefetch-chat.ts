@@ -1,6 +1,6 @@
 import { ChatData } from 'chat-type';
 import { useQuery } from '@tanstack/react-query';
-import { fetchClient } from '@/utils';
+import { fetchClient, Error } from '@/utils';
 
 const queryKey = 'chat';
 
@@ -10,11 +10,9 @@ export const chatFetcher = async () => {
 };
 
 export const useFetchChat = () => {
-  const result = useQuery<Array<ChatData>>([queryKey], chatFetcher, {
-    useErrorBoundary: (error: any) => {
-      console.log("123", error);
-      return error.status >= 500;
-    },
+  const result = useQuery<Array<ChatData>, Error['response']>([queryKey], chatFetcher, {
+    useErrorBoundary: (error) => (error?.status as number) >= 500,
   });
+
   return result;
 };

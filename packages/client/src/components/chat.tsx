@@ -8,8 +8,8 @@ export default function Chat() {
 
   return (
     <Styles.AniBottomToTop>
-      {chatData?.map(({ content, isSender, fullDate }, idx) => (
-        <Dialog key={`${content}-${idx}`} content={content} isSender={isSender} fullDate={fullDate} />
+      {chatData?.map(({ content, isSender, fullDate }) => (
+        <Dialog key={`${content}`} content={content} isSender={isSender} fullDate={fullDate} />
       ))}
       <h2>222</h2>
     </Styles.AniBottomToTop>
