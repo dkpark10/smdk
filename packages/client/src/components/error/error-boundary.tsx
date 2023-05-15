@@ -1,10 +1,10 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable no-console */
 import React, { ReactNode } from 'react';
+import Error500 from './error500';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
-  fallback?: ReactNode;
 }
 
 interface ErrorBoundaryState {
@@ -27,10 +27,10 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
 
   render() {
     const { hasError } = this.state;
-    const { children, fallback } = this.props;
+    const { children } = this.props;
 
     if (hasError) {
-      return fallback;
+      return <Error500 />;
     }
 
     return children;

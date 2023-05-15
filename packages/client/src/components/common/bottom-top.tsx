@@ -7,7 +7,7 @@ interface BottomToTopProps {
   children: ReactNode;
 }
 
-const animation = `${moveTopFromBottom} 0.5s ease-in-out`;
+const animation = `${moveTopFromBottom} 0.3s ease-in-out`;
 
 export default function BottomToTop({ children }: BottomToTopProps) {
   return (

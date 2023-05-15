@@ -58,7 +58,7 @@ export default function Index() {
           </Box>
         </main>
       ) : (
-        <ErrorBoundary fallback={<h1>에러 바운더리</h1>}>
+        <ErrorBoundary>
           <Chat />
         </ErrorBoundary>
       )}
