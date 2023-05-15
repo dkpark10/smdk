@@ -4,9 +4,13 @@ import { fetchClient, Error } from '@/utils';
 
 const queryKey = 'chat';
 
+interface ChatResponseData {
+  chatData: Array<ChatData>;
+}
+
 export const chatFetcher = async () => {
-  const { data } = await fetchClient.get<Array<ChatData>>('api/chat');
-  return data;
+  const { data } = await fetchClient.get<ChatResponseData>('api/chat');
+  return data.chatData;
 };
 
 export const useFetchChat = () => {

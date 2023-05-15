@@ -14,8 +14,8 @@ export default function Chat() {
 
   return (
     <Styles.AniBottomToTop>
-      {chatData?.map(({ content, isSender, fullDate }) => (
-        <Flex key={`${content}`} p={1.5}>
+      {chatData?.map(({ content, isSender, fullDate, milliSeconds }) => (
+        <Flex key={milliSeconds} p={1.5}>
           <Dialog key={`${content}`} content={content} isSender={isSender} fullDate={fullDate} />
         </Flex>
       ))}

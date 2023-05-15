@@ -1,7 +1,7 @@
 import { Badge, Spacer, Container } from '@chakra-ui/react';
 import { ChatData } from 'chat-type';
 
-export default function Dialog({ content, isSender = true, fullDate }: ChatData) {
+export default function Dialog({ content, isSender = true, fullDate }: Partial<ChatData>) {
   return (
     <>
       {!isSender && <Spacer />}

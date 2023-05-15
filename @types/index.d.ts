@@ -50,6 +50,7 @@ declare module 'chat-type' {
     content: string;
     fullDate: string;
     isSender: boolean;
+    milliSeconds: string;
   }
 }
 

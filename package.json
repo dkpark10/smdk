@@ -4,6 +4,9 @@
   "author": "dkpark10",
   "description": "smdk",
   "private": true,
+  "scripts": {
+    "mock:chat": "ts-node ./scripts/generate-chat-mock.ts"
+  },
   "workspaces": {
     "packages": [
       "packages/server",
