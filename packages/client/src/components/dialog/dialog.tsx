@@ -1,13 +1,29 @@
-import { Badge, Spacer, Container } from '@chakra-ui/react';
+import { Spacer, Container, Flex } from '@chakra-ui/react';
 import { ChatData } from 'chat-type';
 
-export default function Dialog({ content, isSender = true, fullDate }: Partial<ChatData>) {
+interface DialogProps extends Partial<ChatData> {
+  dateComponent: JSX.Element | JSX.Element[];
+}
+
+export default function Dialog({ content, isSender = true, dateComponent }: DialogProps) {
   return (
     <>
       {!isSender && <Spacer />}
-      <Badge bgColor={isSender ? 'primary' : 'gray.200'} maxW="70vw">
-        <Container maxW="md">{content}</Container>
-      </Badge>
+      <Flex align="flex-end" gap={1}>
+        {!isSender && dateComponent}
+        <Container
+          borderRadius="md"
+          maxW="70vw"
+          fontSize="0.9rem"
+          bgColor={isSender ? 'gray.200' : 'primary'}
+          color={isSender ? 'fontColor' : 'white'}
+          wordBreak="break-all"
+          px={1}
+        >
+          {content}
+        </Container>
+        {isSender && dateComponent}
+      </Flex>
       {isSender && <Spacer />}
     </>
   );
