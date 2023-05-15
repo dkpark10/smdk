@@ -18,6 +18,13 @@ export const theme = extendTheme({
         colorScheme: 'primary',
       },
     }),
+
+    Badge: defineStyleConfig({
+      baseStyle: {
+        borderRadius: 'md',
+        color: 'white',
+      },
+    }),
   },
 
   fonts: {

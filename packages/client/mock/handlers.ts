@@ -3,8 +3,8 @@ import { chatData } from './mock_assets/chat_mock';
 
 export const handlers = [
   rest.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/chat`, (_, res, ctx) => {
-    return res(ctx.status(500), ctx.json({ result: 'internal server error' }));
-    // return res(ctx.status(200), ctx.json(chatData));
+    // return res(ctx.status(500), ctx.json({ result: 'internal server error' }));
+    return res(ctx.status(200), ctx.json(chatData));
   }),
 
   rest.get(`${process.env.NEXT_PUBLIC_BASE_URL}/test`, (_, res, ctx) => {
