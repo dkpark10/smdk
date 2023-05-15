@@ -12,7 +12,7 @@ declare namespace NodeJS {
 declare module 'common-type' {
   export type MonthEN =
   | "January"
-  | "Februay"
+  | "February"
   | "March"
   | "April"
   | "May"

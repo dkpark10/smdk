@@ -9,11 +9,12 @@ interface ChatData {
   content: string;
   fullDate: string;
   isSender: boolean;
+  milliSeconds: string;
 }
 
 export type Month =
   | "January"
-  | "Februay"
+  | "February"
   | "March"
   | "April"
   | "May"
@@ -29,7 +30,7 @@ export type AfterNoon = "AM" | "PM";
 
 const monthMap = new Map<Month, string>();
 monthMap.set("January", "1월");
-monthMap.set("Februay", "2월");
+monthMap.set("February", "2월");
 monthMap.set("March", "3월");
 monthMap.set("April", "4월");
 monthMap.set("May", "5월");
@@ -47,13 +48,13 @@ monthMap.set("December", "12월");
 export const parsingDate = (date:string) => {
   const checkAfternoon = (value: AfterNoon) => (value === "AM" ? "오전" : "오후");
 
-  const splitedDate = date.replace(",", "").split(" ");
-  const afterNoon = splitedDate.slice(-1)[0];
-  const time = splitedDate.slice(-2)[0];
+  const splittedDate = date.replace(",", "").split(" ");
+  const afterNoon = splittedDate.slice(-1)[0];
+  const time = splittedDate.slice(-2)[0];
 
-  const year = splitedDate[2];
-  const day = splitedDate[1];
-  const month = monthMap.get(splitedDate[0] as Month);
+  const year = splittedDate[2];
+  const day = splittedDate[1];
+  const month = monthMap.get(splittedDate[0] as Month);
 
   const sendDate = `${checkAfternoon(afterNoon as AfterNoon)} ${time}`;
   const fullDate = `${year}년 ${month} ${day}일`;
@@ -67,7 +68,7 @@ export const parsingDate = (date:string) => {
 (async function () {
   const COUNT_CREATED_CHAT = 20;
   const newChat: ChatData[] = [];
-  const chatDataPath = "packages/client/src/mock/mock_assets/chat_mock.json";
+  const chatDataPath = "packages/client/mock/mock_assets/chat_mock.json";
 
   try {
     const mockFilePath = path.join(__dirname, chatDataPath);
@@ -77,7 +78,7 @@ export const parsingDate = (date:string) => {
     };
 
     const lastSendDate = chatData.slice(-1)[0].fullDate;
-    const lastSendTime = (/\s[0-9]*\:[0-9]*\s/g.exec(lastSendDate) as object)[0];
+    const lastSendTime = (/\s[0-9]*\:[0-9]*\s/g.exec(lastSendDate) as RegExpExecArray)[0];
   
     for (let minute = 1; minute <= COUNT_CREATED_CHAT; minute += 1) {
       newChat.push({
@@ -88,6 +89,7 @@ export const parsingDate = (date:string) => {
        * @description moment().format('LLL'); April 16, 2023 11:40 AM
        */
         fullDate: moment(lastSendTime, 'hh:mm').add(minute, "minutes").format("LLL"),
+        milliSeconds: moment(lastSendTime, 'hh:mm').add(1000, "milliseconds").format('x'),
       });
     }
 
@@ -96,6 +98,7 @@ export const parsingDate = (date:string) => {
     };
 
     writeFileSync(path.join(__dirname, chatDataPath), JSON.stringify(data));
+    console.log('채팅 모킹데이터 생성 성공');
   } catch (error) {
     console.error(error);
   }

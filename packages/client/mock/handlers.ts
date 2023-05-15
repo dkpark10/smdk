@@ -1,5 +1,6 @@
 import { rest } from 'msw';
-import { chatData } from './mock_assets/chat_mock';
+// eslint-disable-next-line import/extensions
+import chatData from './mock_assets/chat_mock.json';
 
 export const handlers = [
   rest.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/chat`, (_, res, ctx) => {

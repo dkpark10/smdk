@@ -7,7 +7,7 @@ import { Global } from '@emotion/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme, FONT_FAMILY_BODY, FONT_FAMILY_HEAD } from '@/theme';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enalbed') {
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   import('../../mock');
 }
 
