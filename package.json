@@ -27,6 +27,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "ts-jest": "28.0.8",
     "ts-loader": "^9.2.3",
-    "prettier": "^2.8.5"
+    "prettier": "^2.8.5",
+    "zod": "^3.21.4"
   }
 }

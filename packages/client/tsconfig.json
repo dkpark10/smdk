@@ -16,7 +16,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "../../@types", "mock/mock_assets/chat_mock.sjon", "mock/mock_assets/chat_mock.josn",
+    "../../@types", "mock/mock_assets/chat_mock.json", "mock/mock_assets/chat_mock.json",
   ],
   "exclude": [
     "./node_modules/**/*",

@@ -2,10 +2,13 @@
   "cSpell.words": [
     "chakra",
     "dkpark10",
+    "nestjs",
     "Noto",
     "smdk",
     "swiper",
     "tanstack",
-    "usefetch"
+    "trpc",
+    "usefetch",
+    "websockets"
   ]
 }

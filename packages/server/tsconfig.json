@@ -17,5 +17,20 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "paths": {
+    "@/*": [
+      "./src/*"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../../@types",
+  ],
+  "exclude": [
+    "./node_modules/**/*",
+    "./dist",
+    "./__test__/**/*"
+  ],
 }
