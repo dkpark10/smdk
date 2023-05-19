@@ -6,7 +6,7 @@ import { trpc } from '@/trpc';
 const parseDate = (date: string) => date.split(' ').slice(3);
 
 export default function Chat() {
-  const { data: chatData, isLoading } = trpc.getChatData.useQuery();
+  const { data: chatData, isLoading } = trpc.chat.getChatData.useQuery();
 
   /** @todo suspense */
   if (isLoading) {

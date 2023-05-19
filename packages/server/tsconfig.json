@@ -22,10 +22,10 @@
   "paths": {
     "@/*": [
       "./src/*"
-    ]
+    ],
+    "@client/*": [
+      "../client/*"
+    ],
   },
-  "include": [
-    "./src/**/*.ts",
-  ],
   "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }

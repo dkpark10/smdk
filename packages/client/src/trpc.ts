@@ -1,7 +1,7 @@
 import { createTRPCReact, httpBatchLink } from '@trpc/react-query';
-import type { ChatRouter } from 'smdk-server/src/main';
+import type { AppRouter } from '@server/main';
 
-export const trpc = createTRPCReact<ChatRouter>();
+export const trpc = createTRPCReact<AppRouter>();
 
 export const trpcClient = trpc.createClient({
   links: [
