@@ -1,12 +1,12 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { useFetchChat } from '@/services/usefetch-chat';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
+import { trpc } from '@/trpc';
 
 const parseDate = (date: string) => date.split(' ').slice(3);
 
 export default function Chat() {
-  const { data: chatData, isLoading } = useFetchChat();
+  const { data: chatData, isLoading } = trpc.getChatData.useQuery();
 
   /** @todo suspense */
   if (isLoading) {
@@ -18,7 +18,7 @@ export default function Chat() {
       {chatData?.map(({ content, isSender, fullDate, milliSeconds }) => (
         <Flex key={milliSeconds} p={2}>
           <Dialog
-            key={`${content}`}
+            key={milliSeconds}
             content={content}
             isSender={isSender}
             fullDate={fullDate}

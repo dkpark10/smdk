@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { AppModule } from './app.module';
+import { AppModule } from './src/app.module';
 import helmet from 'helmet';
 import csurf from 'csurf';
 import { router } from './trpc';
-import { chatRouter } from './chat/chat.router';
+import { chatRouter } from './src/chat/chat.router';
 import { createContext } from './trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
 

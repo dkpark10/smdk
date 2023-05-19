@@ -25,13 +25,7 @@
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "../../@types",
+    "./src/**/*.ts",
   ],
-  "exclude": [
-    "./node_modules/**/*",
-    "./dist",
-    "./__test__/**/*"
-  ],
+  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
 }
