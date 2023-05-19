@@ -18,7 +18,7 @@ export default function Dialog({ content, isSender = true, dateComponent }: Dial
           bgColor={isSender ? 'gray.200' : 'primary'}
           color={isSender ? 'fontColor' : 'white'}
           wordBreak="break-all"
-          px={1}
+          px={1.5}
         >
           {content}
         </Container>

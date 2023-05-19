@@ -5,6 +5,7 @@
   "description": "smdk",
   "private": true,
   "scripts": {
+    "dev:all": "yarn workspace smdk-server start:dev & yarn workspace smdk-client dev",
     "mock:chat": "ts-node ./scripts/generate-chat-mock.ts"
   },
   "workspaces": {
