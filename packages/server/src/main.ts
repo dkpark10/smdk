@@ -4,13 +4,15 @@ import { AppModule } from './app.module';
 import helmet from 'helmet';
 import csurf from 'csurf';
 import { router } from './trpc';
-import { chatRouter } from './chat/router';
+import { chatRouter } from './chat/chat.router';
 import { createContext } from './trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
 
 export const appRouter = router({
   chat: chatRouter,
 });
+
+export type ChatRouter = typeof chatRouter;
 
 (async function run() {
   /**

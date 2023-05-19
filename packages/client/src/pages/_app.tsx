@@ -6,9 +6,11 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { theme, FONT_FAMILY_BODY, FONT_FAMILY_HEAD } from '@/theme';
+import { trpc, trpcClient } from '@/trpc';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  import('../../mock');
+  // eslint-disable-next-line import/no-relative-packages
+  // import('../../../../mock');
 }
 
 const queryClient = new QueryClient({
@@ -21,11 +23,12 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen />
-      <ChakraProvider resetCSS theme={theme}>
-        <Global
-          styles={`
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen />
+        <ChakraProvider resetCSS theme={theme}>
+          <Global
+            styles={`
             @font-face {
               font-family: '${FONT_FAMILY_HEAD}';
               font-style: normal;
@@ -42,9 +45,10 @@ export default function App({ Component, pageProps }: AppProps) {
               src: url('/fonts/NotoSansKR-Light.woff2') format('woff2');
             }
           `}
-        />
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </QueryClientProvider>
+          />
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }

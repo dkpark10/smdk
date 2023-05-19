@@ -25,7 +25,7 @@ export default function Index() {
         <link rel="preload" href="fonts/Inter-Light.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </Head>
       {!isLogin ? (
-        <main>
+        <Box as="main">
           <Box w="100vw" h="100vh">
             <Center h="22vh">
               <HStack>
@@ -56,7 +56,7 @@ export default function Index() {
               </Center>
             </form>
           </Box>
-        </main>
+        </Box>
       ) : (
         <ErrorBoundary>
           <Chat />
