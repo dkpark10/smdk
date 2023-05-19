@@ -8,7 +8,6 @@ import { router } from './trpc';
 import { chatRouter } from './src/chat/chat.router';
 import { createContext } from './trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
-import * as express from 'express';
 
 export const appRouter = router({
   chat: chatRouter,
@@ -17,13 +16,14 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter;
 
 (async function run() {
-  /**
-   * @todo cors 설정 디테일하게
-   */
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.use(helmet());
 
-  app.use(cors());
+  /**@todo 환경변수에 따른 도메인 설정 */
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  }));
 
   app.useWebSocketAdapter(new WsAdapter(app));
 
