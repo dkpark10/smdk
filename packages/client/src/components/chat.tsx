@@ -1,4 +1,5 @@
-import { Flex, Text, Input, Box } from '@chakra-ui/react';
+import { Flex, Text, Input } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
@@ -7,6 +8,22 @@ const parseDate = (date: string) => date.split(' ').slice(3);
 
 export default function Chat() {
   const { data: chatData, isLoading } = trpc.chat.getChatData.useQuery();
+
+  useEffect(() => {
+    const socket = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
+    socket.onopen = () => {
+      console.log('Connected');
+      socket.send(
+        JSON.stringify({
+          event: 'events',
+          data: 'test123',
+        }),
+      );
+      socket.onmessage = (data) => {
+        console.log(data);
+      };
+    };
+  }, []);
 
   /** @todo suspense */
   if (isLoading) {
@@ -17,7 +34,7 @@ export default function Chat() {
     <Styles.AniBottomToTop>
       <Flex overflow="auto" h="95vh" flexDirection="column-reverse">
         {chatData?.map(({ content, isSender, fullDate, milliSeconds }) => (
-          <Flex key={milliSeconds} p={2}>
+          <Flex key={content} p={2}>
             <Dialog
               key={milliSeconds}
               content={content}
@@ -32,8 +49,8 @@ export default function Chat() {
           </Flex>
         ))}
       </Flex>
-      <Flex h="5vh" bgColor="gray.700" px={1} py={1.5}>
-        <Input color="white" variant="unstyled" bgColor="gray.800" />
+      <Flex h="5vh" bgColor="gray.700" px={3} py={1.5}>
+        <Input color="white" variant="unstyled" bgColor="gray.800" borderRadius="xl" />
       </Flex>
     </Styles.AniBottomToTop>
   );

@@ -257,7 +257,7 @@ export const chatRouter = router({
     return chatData;
   }),
 
-  createUser: publicProcedure
+  createChatData: publicProcedure
     .input(z.object({ content: z.string() }))
     .mutation((req) => {
       const { input } = req;
