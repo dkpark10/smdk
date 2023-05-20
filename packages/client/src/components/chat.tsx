@@ -32,7 +32,9 @@ export default function Chat() {
           </Flex>
         ))}
       </Flex>
-      <Input />
+      <Flex h="5vh" bgColor="gray.700" px={1} py={1.5}>
+        <Input color="white" variant="unstyled" bgColor="gray.800" />
+      </Flex>
     </Styles.AniBottomToTop>
   );
 }
