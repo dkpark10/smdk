@@ -256,4 +256,11 @@ export const chatRouter = router({
   getChatData: publicProcedure.query(() => {
     return chatData;
   }),
+
+  createUser: publicProcedure
+    .input(z.object({ content: z.string() }))
+    .mutation((req) => {
+      const { input } = req;
+      console.log(input.content);
+    }),
 });
