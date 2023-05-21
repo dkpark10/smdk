@@ -9,21 +9,21 @@ const parseDate = (date: string) => date.split(' ').slice(3);
 export default function Chat() {
   const { data: chatData, isLoading } = trpc.chat.getChatData.useQuery();
 
-  useEffect(() => {
-    const socket = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
-    socket.onopen = () => {
-      console.log('Connected');
-      socket.send(
-        JSON.stringify({
-          event: 'events',
-          data: 'test123',
-        }),
-      );
-      socket.onmessage = (data) => {
-        console.log(data);
-      };
-    };
-  }, []);
+  // useEffect(() => {
+  //   const socket = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
+  //   socket.onopen = () => {
+  //     console.log('Connected');
+  //     socket.send(
+  //       JSON.stringify({
+  //         event: 'events',
+  //         data: 'test123',
+  //       }),
+  //     );
+  //     socket.onmessage = (data) => {
+  //       console.log(data);
+  //     };
+  //   };
+  // }, []);
 
   /** @todo suspense */
   if (isLoading) {

@@ -1,7 +1,10 @@
 import { initTRPC, inferAsyncReturnType } from '@trpc/server';
-import * as trpcExpress from '@trpc/server/adapters/express';
+import { CreateHTTPContextOptions } from '@trpc/server/adapters/standalone';
+import { CreateWSSContextFnOptions } from '@trpc/server/adapters/ws';
 
-export const createContext = ({ req, res }: trpcExpress.CreateExpressContextOptions) => {
+// import * as trpcExpress from '@trpc/server/adapters/express';
+
+export const createContext = (opts: CreateHTTPContextOptions | CreateWSSContextFnOptions) => {
   return {};
 };
 
