@@ -24,7 +24,17 @@ const queryClient = new QueryClient({
 function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen />
+      <ReactQueryDevtools
+        initialIsOpen
+        position="bottom-right"
+        toggleButtonProps={{
+          style: {
+            marginLeft: '5.5rem',
+            transform: `scale(.7)`,
+            transformOrigin: 'bottom right',
+          },
+        }}
+      />
       <ChakraProvider resetCSS theme={theme}>
         <Global
           styles={`
