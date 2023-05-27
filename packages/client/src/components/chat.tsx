@@ -33,20 +33,22 @@ export default function Chat() {
         return;
       }
 
-      mutation.mutate(chatInputElement.current.value);
-      // socket.current?.send(
-      //   JSON.stringify({
-      //     event: 'events',
-      //     data: chatInputElement.current?.value,
-      //   }),
-      // );
+      // mutation.mutate(chatInputElement.current.value);
+      socket.current?.send(
+        JSON.stringify({
+          event: 'events',
+          data: chatInputElement.current?.value,
+        }),
+      );
+
+      refetch().catch(console.error);
 
       chatInputElement.current.value = '';
     };
 
     window.addEventListener('keydown', sendChatData);
     return () => window.removeEventListener('keydown', sendChatData);
-  }, [mutation]);
+  }, [mutation, refetch]);
 
   /** @todo suspense */
   if (isLoading) {
