@@ -73,7 +73,15 @@ export default function Chat() {
         ))}
       </Flex>
       <Flex h="5vh" bgColor="gray.700" px={3} py={1.5}>
-        <Input ref={chatInputElement} color="white" px={3} variant="unstyled" bgColor="gray.800" borderRadius="xl" />
+        <Input
+          ref={chatInputElement}
+          color="white"
+          px={3}
+          variant="unstyled"
+          bgColor="gray.800"
+          borderRadius="xl"
+          fontSize="sm"
+        />
       </Flex>
     </Styles.AniBottomToTop>
   );
