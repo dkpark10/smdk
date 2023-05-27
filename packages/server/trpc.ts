@@ -10,7 +10,7 @@ export const createContext = (opts: CreateHTTPContextOptions | CreateWSSContextF
 
 export type Context = inferAsyncReturnType<typeof createContext>;
 
-const t = initTRPC.context<Context>().create();
+export const t = initTRPC.context<Context>().create();
 
 export const middleware = t.middleware;
 

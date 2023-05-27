@@ -1,7 +1,7 @@
 import { applyWSSHandler } from '@trpc/server/adapters/ws';
-import { WebSocketServer } from 'ws';
+import * as ws from 'ws';
 import { NestFactory } from '@nestjs/core';
-// import { WsAdapter } from '@nestjs/platform-ws';
+import { WsAdapter } from '@nestjs/platform-ws';
 import { AppModule } from './src/app.module';
 import helmet from 'helmet';
 // import csurf from 'csurf';
@@ -25,37 +25,44 @@ const socketServerPort = 8081;
   app.use(helmet());
 
   /**@todo 환경변수에 따른 도메인 설정 */
-  app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-  }));
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      credentials: true,
+    }),
+  );
 
-  // app.useWebSocketAdapter(new WsAdapter(app));
+  app.useWebSocketAdapter(new WsAdapter(app));
 
-  const wss = new WebSocketServer({
-    port: socketServerPort,
-  });
+  // const wss = new ws.Server({
+  //   port: socketServerPort,
+  // });
 
-  const handler = applyWSSHandler({ wss, router: appRouter, createContext });
-  wss.on('connection', (ws) => {
-    console.log(`➕➕ Connection (${wss.clients.size})`);
-    ws.once('close', () => {
-      console.log(`➖➖ Connection (${wss.clients.size})`);
-    });
-  });
+  // const handler = applyWSSHandler({ wss, router: appRouter, createContext });
+  // wss.on('connection', (ws, request) => {
+  //   console.log(`++ Connection (${wss.clients.size})`);
 
-  process.on('SIGTERM', () => {
-    console.log('SIGTERM');
-    handler.broadcastReconnectNotification();
-    wss.close();
-  });
-  
-  app.use('/trpc', trpcExpress.createExpressMiddleware({
-    router: appRouter,
-    createContext,
-  }));
+  //   ws.on('message', (msg) => {
+  //     console.log(`클라이언트에게 수신한 메시지 : ${msg}`);
+  //     ws.send('메시지 잘 받았습니다! from 서버');
+  //   });
+  // });
 
-  await app.listen(serverPort, async() => {
+  // process.on('SIGTERM', () => {
+  //   console.log('SIGTERM');
+  //   handler.broadcastReconnectNotification();
+  //   wss.close();
+  // });
+
+  app.use(
+    '/trpc',
+    trpcExpress.createExpressMiddleware({
+      router: appRouter,
+      createContext,
+    }),
+  );
+
+  await app.listen(serverPort, async () => {
     console.log(`Application is running on: ${serverPort}`);
   });
 })();
