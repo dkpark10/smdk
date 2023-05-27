@@ -7,8 +7,8 @@ export const chatRouter = router({
     return chatData.reverse();
   }),
 
-  createChatData: t.procedure.input(z.object({ content: z.string() })).mutation((req) => {
+  createChatData: t.procedure.input(z.string()).mutation((req) => {
     const { input } = req;
-    createFakerChatData(input.content);
+    createFakerChatData(input);
   }),
 });

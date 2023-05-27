@@ -1,5 +1,5 @@
 import { Flex, Text, Input } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
@@ -7,7 +7,11 @@ import { trpc } from '@/trpc';
 const parseDate = (date: string) => date.split(' ').slice(3);
 
 export default function Chat() {
-  const { data: chatData, isLoading } = trpc.chat.getChatData.useQuery();
+  const { data: chatData, isLoading, refetch } = trpc.chat.getChatData.useQuery();
+
+  const mutation = trpc.chat.createChatData.useMutation({
+    onSuccess: () => refetch(),
+  });
 
   const chatInputElement = useRef<HTMLInputElement | null>(null);
 
@@ -25,10 +29,11 @@ export default function Chat() {
     };
 
     const sendChatData = (e: KeyboardEvent) => {
-      if (e.key !== 'Enter' || chatInputElement.current?.value === '') {
+      if (e.key !== 'Enter' || !chatInputElement.current || chatInputElement.current?.value === '') {
         return;
       }
 
+      mutation.mutate(chatInputElement.current.value);
       // socket.current?.send(
       //   JSON.stringify({
       //     event: 'events',
@@ -36,12 +41,12 @@ export default function Chat() {
       //   }),
       // );
 
-      (chatInputElement.current as HTMLInputElement).value = '';
+      chatInputElement.current.value = '';
     };
 
     window.addEventListener('keydown', sendChatData);
     return () => window.removeEventListener('keydown', sendChatData);
-  }, []);
+  }, [mutation]);
 
   /** @todo suspense */
   if (isLoading) {
@@ -68,7 +73,7 @@ export default function Chat() {
         ))}
       </Flex>
       <Flex h="5vh" bgColor="gray.700" px={3} py={1.5}>
-        <Input ref={chatInputElement} color="white" variant="unstyled" bgColor="gray.800" borderRadius="xl" />
+        <Input ref={chatInputElement} color="white" px={3} variant="unstyled" bgColor="gray.800" borderRadius="xl" />
       </Flex>
     </Styles.AniBottomToTop>
   );
