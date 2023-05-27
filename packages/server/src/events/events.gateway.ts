@@ -6,6 +6,7 @@ import {
 } from '@nestjs/websockets';
 
 import { Server } from 'ws';
+import { createFakerChatData } from '../chat/chat.model';
 
 @WebSocketGateway(8081)
 export class EventsGateway {
@@ -13,8 +14,7 @@ export class EventsGateway {
   server: Server;
 
   @SubscribeMessage('events')
-  onEvent(client: any, data: any): string {
-    console.log("websocket 연결", data);
-    return 'events socket';
+  onEvent(client: any, data: string) {
+    createFakerChatData(data);
   }
 }

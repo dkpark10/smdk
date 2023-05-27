@@ -1,5 +1,5 @@
 import { Flex, Text, Input } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
@@ -9,21 +9,38 @@ const parseDate = (date: string) => date.split(' ').slice(3);
 export default function Chat() {
   const { data: chatData, isLoading } = trpc.chat.getChatData.useQuery();
 
-  useEffect(() => {
-    const socket = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
+  const chatInputElement = useRef<HTMLInputElement | null>(null);
 
-    // socket.onopen = () => {
-    //   console.log('Connected');
-    //   socket.send(
-    //     JSON.stringify({
-    //       event: 'events',
-    //       data: 'test123',
-    //     }),
-    //   );
-    //   socket.onmessage = (data) => {
-    //     console.log(data);
-    //   };
-    // };
+  const socket = useRef<WebSocket>();
+
+  useEffect(() => {
+    socket.current = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
+
+    socket.current.onopen = () => {
+      console.log('Connected');
+    };
+
+    socket.current.onmessage = (data) => {
+      console.log(data);
+    };
+
+    const sendChatData = (e: KeyboardEvent) => {
+      if (e.key !== 'Enter' || chatInputElement.current?.value === '') {
+        return;
+      }
+
+      // socket.current?.send(
+      //   JSON.stringify({
+      //     event: 'events',
+      //     data: chatInputElement.current?.value,
+      //   }),
+      // );
+
+      (chatInputElement.current as HTMLInputElement).value = '';
+    };
+
+    window.addEventListener('keydown', sendChatData);
+    return () => window.removeEventListener('keydown', sendChatData);
   }, []);
 
   /** @todo suspense */
@@ -51,7 +68,7 @@ export default function Chat() {
         ))}
       </Flex>
       <Flex h="5vh" bgColor="gray.700" px={3} py={1.5}>
-        <Input color="white" variant="unstyled" bgColor="gray.800" borderRadius="xl" />
+        <Input ref={chatInputElement} color="white" variant="unstyled" bgColor="gray.800" borderRadius="xl" />
       </Flex>
     </Styles.AniBottomToTop>
   );
