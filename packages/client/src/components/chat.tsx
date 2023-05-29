@@ -1,4 +1,4 @@
-import { Flex, Text, Input } from '@chakra-ui/react';
+import { Flex, Text, Input, Box } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import { ChatData } from 'chat-type';
@@ -56,23 +56,25 @@ export default function Chat() {
 
   return (
     <Styles.AniBottomToTop>
-      <Flex overflow="auto" h="95vh" flexDirection="column-reverse">
-        {showChatData?.reverse().map(({ content, isSender, fullDate, milliSeconds }) => (
-          <Flex key={content} p={2}>
-            <Dialog
-              key={milliSeconds}
-              content={content}
-              isSender={isSender}
-              fullDate={fullDate}
-              dateComponent={
-                <Text fontSize="xs" color="gray.400">
-                  {parseDate(fullDate)}
-                </Text>
-              }
-            />
-          </Flex>
-        ))}
-      </Flex>
+      <Box overflowY="scroll" transform="rotate(180deg)">
+        <Flex h="95vh" flexDirection="column-reverse" justifyContent="flex-end">
+          {showChatData?.map(({ content, isSender, fullDate, milliSeconds }) => (
+            <Flex key={content} p={2}>
+              <Dialog
+                key={milliSeconds}
+                content={content}
+                isSender={isSender}
+                fullDate={fullDate}
+                dateComponent={
+                  <Text fontSize="xs" color="gray.400" transform="rotate(180deg)">
+                    {parseDate(fullDate)}
+                  </Text>
+                }
+              />
+            </Flex>
+          ))}
+        </Flex>
+      </Box>
       <Flex h="5vh" bgColor="gray.700" px={3} py={1.5}>
         <Input
           ref={chatInputElement}

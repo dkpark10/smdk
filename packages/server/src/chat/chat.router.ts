@@ -4,7 +4,7 @@ import { chatData, createFakerChatData } from './chat.model';
 
 export const chatRouter = router({
   getChatData: t.procedure.query(() => {
-    return chatData.reverse();
+    return chatData;
   }),
 
   createChatData: t.procedure.input(z.string()).mutation((req) => {
