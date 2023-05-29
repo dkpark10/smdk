@@ -1,5 +1,5 @@
 import { Flex, Text, Input } from '@chakra-ui/react';
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
@@ -7,7 +7,13 @@ import { trpc } from '@/trpc';
 const parseDate = (date: string) => date.split(' ').slice(3);
 
 export default function Chat() {
-  const { data: chatData, isLoading, refetch } = trpc.chat.getChatData.useQuery();
+  const {
+    data: chatData,
+    isLoading,
+    refetch,
+  } = trpc.chat.getChatData.useQuery(undefined, {
+    staleTime: Infinity,
+  });
 
   const mutation = trpc.chat.createChatData.useMutation({
     onSuccess: () => refetch(),
@@ -26,6 +32,7 @@ export default function Chat() {
 
     socket.current.onmessage = (data) => {
       console.log(data);
+      refetch().catch(console.error);
     };
 
     const sendChatData = (e: KeyboardEvent) => {

@@ -256,6 +256,5 @@ export const createFakerChatData = (content: string) => {
    milliSeconds: '1684113481000',
  };
   chatData.push(newChatData);
-  console.log(chatData.length);
 };
 
