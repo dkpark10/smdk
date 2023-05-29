@@ -1,38 +1,31 @@
 import { Flex, Text, Input } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { io } from 'socket.io-client';
+import { ChatData } from 'chat-type';
 import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
 
+const socket = io('http://localhost:8080');
+
 const parseDate = (date: string) => date.split(' ').slice(3);
 
+const CHAT_SOCKET_HANDLER = 'message';
+const CHAT_SOCKET_JOIN_ROOM = 'join-room';
+
 export default function Chat() {
-  const {
-    data: chatData,
-    isLoading,
-    refetch,
-  } = trpc.chat.getChatData.useQuery(undefined, {
+  const { data: chatServerData, isLoading } = trpc.chat.getChatData.useQuery(undefined, {
     staleTime: Infinity,
   });
 
-  const mutation = trpc.chat.createChatData.useMutation({
-    onSuccess: () => refetch(),
-  });
+  const [showChatData, setShowChatData] = useState<ChatData[]>([]);
 
   const chatInputElement = useRef<HTMLInputElement | null>(null);
 
-  const socket = useRef<WebSocket>();
-
   useEffect(() => {
-    socket.current = new WebSocket(process.env.NEXT_PUBLIC_SOCKET_SERVER);
-
-    socket.current.onopen = () => {
-      console.log('Connected');
-    };
-
-    socket.current.onmessage = (data) => {
-      console.log(data);
-      refetch().catch(console.error);
+    setShowChatData(chatServerData || []);
+    const chatHandler = (newChatData: ChatData) => {
+      setShowChatData((prev) => [...prev, newChatData]);
     };
 
     const sendChatData = (e: KeyboardEvent) => {
@@ -40,22 +33,21 @@ export default function Chat() {
         return;
       }
 
-      // mutation.mutate(chatInputElement.current.value);
-      socket.current?.send(
-        JSON.stringify({
-          event: 'chat',
-          data: chatInputElement.current?.value,
-        }),
-      );
-
-      refetch().catch(console.error);
-
+      socket.emit(CHAT_SOCKET_HANDLER, chatInputElement.current.value, chatHandler);
       chatInputElement.current.value = '';
     };
 
+    socket.on(CHAT_SOCKET_HANDLER, chatHandler);
     window.addEventListener('keydown', sendChatData);
-    return () => window.removeEventListener('keydown', sendChatData);
-  }, [mutation, refetch]);
+    return () => {
+      socket.off(CHAT_SOCKET_HANDLER, chatHandler);
+      window.removeEventListener('keydown', sendChatData);
+    };
+  }, [chatServerData]);
+
+  useEffect(() => {
+    socket.emit(CHAT_SOCKET_JOIN_ROOM);
+  }, []);
 
   /** @todo suspense */
   if (isLoading) {
@@ -65,7 +57,7 @@ export default function Chat() {
   return (
     <Styles.AniBottomToTop>
       <Flex overflow="auto" h="95vh" flexDirection="column-reverse">
-        {chatData?.map(({ content, isSender, fullDate, milliSeconds }) => (
+        {showChatData?.reverse().map(({ content, isSender, fullDate, milliSeconds }) => (
           <Flex key={content} p={2}>
             <Dialog
               key={milliSeconds}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 export class ClientLogger {
   static log(msg?: any, ...rest: any[]) {

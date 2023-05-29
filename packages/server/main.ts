@@ -10,6 +10,7 @@ import { router } from './trpc';
 import { chatRouter } from './src/chat/chat.router';
 import { createContext } from './trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
+import { Logger } from '@nestjs/common';
 
 export const appRouter = router({
   chat: chatRouter,
@@ -18,10 +19,10 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter;
 
 const serverPort = 8080;
-const socketServerPort = 8081;
 
 (async function run() {
   const app = await NestFactory.create(AppModule);
+
   app.use(helmet());
 
   /**@todo 환경변수에 따른 도메인 설정 */
@@ -32,28 +33,6 @@ const socketServerPort = 8081;
     }),
   );
 
-  app.useWebSocketAdapter(new WsAdapter(app));
-
-  // const wss = new ws.Server({
-  //   port: socketServerPort,
-  // });
-
-  // const handler = applyWSSHandler({ wss, router: appRouter, createContext });
-  // wss.on('connection', (ws, request) => {
-  //   console.log(`++ Connection (${wss.clients.size})`);
-
-  //   ws.on('message', (msg) => {
-  //     console.log(`클라이언트에게 수신한 메시지 : ${msg}`);
-  //     ws.send('메시지 잘 받았습니다! from 서버');
-  //   });
-  // });
-
-  // process.on('SIGTERM', () => {
-  //   console.log('SIGTERM');
-  //   handler.broadcastReconnectNotification();
-  //   wss.close();
-  // });
-
   app.use(
     '/trpc',
     trpcExpress.createExpressMiddleware({
@@ -63,6 +42,6 @@ const socketServerPort = 8081;
   );
 
   await app.listen(serverPort, async () => {
-    console.log(`Application is running on: ${serverPort}`);
+    Logger.log(`Application is running on: ${serverPort}`);
   });
 })();

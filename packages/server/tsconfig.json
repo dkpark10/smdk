@@ -28,11 +28,13 @@
     ],
   },
   "include": [
+    "**/*.ts",
     "../../@types",
   ],
   "exclude": [
-    "./node_modules/**/*",
-    "./dist",
-    "./__test__/**/*"
-  ],
+    "node_modules",
+    "test",
+    "dist",
+    "**/*spec.ts"
+  ]
 }
