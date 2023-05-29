@@ -27,5 +27,12 @@
       "../client/*"
     ],
   },
-  "exclude": ["node_modules", "test", "dist", "**/*spec.ts"]
+  "include": [
+    "../../@types",
+  ],
+  "exclude": [
+    "./node_modules/**/*",
+    "./dist",
+    "./__test__/**/*"
+  ],
 }

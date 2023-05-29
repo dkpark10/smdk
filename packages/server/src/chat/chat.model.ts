@@ -1,9 +1,4 @@
-export interface ChatData {
-  content: string;
-  fullDate: string;
-  isSender: boolean;
-  milliSeconds: string;
-}
+import { ChatData } from 'chat-type';
 
 export const chatData: Array<ChatData> = [
   {
