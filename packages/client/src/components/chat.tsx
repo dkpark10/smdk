@@ -43,7 +43,7 @@ export default function Chat() {
       // mutation.mutate(chatInputElement.current.value);
       socket.current?.send(
         JSON.stringify({
-          event: 'events',
+          event: 'chat',
           data: chatInputElement.current?.value,
         }),
       );
