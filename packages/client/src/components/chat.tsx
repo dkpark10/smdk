@@ -6,7 +6,7 @@ import { Styles } from '@/components/common';
 import Dialog from '@/components/dialog/dialog';
 import { trpc } from '@/trpc';
 
-const socket = io('http://localhost:8080');
+const socket = io(process.env.NEXT_PUBLIC_BASE_URL);
 
 const parseDate = (date: string) => date.split(' ').slice(3);
 

@@ -9,9 +9,9 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
-
 import { Logger } from '@nestjs/common';
-import { createFakerChatData } from '../chat/chat.model';
+import { createFakerChatData } from '@/chat/chat.model';
+import { CHAT_SOCKET_HANDLER, CHAT_SOCKET_JOIN_ROOM, TEMP_ROOM_NAME } from '@common/index';
 
 /** @see {@link https://docs.nestjs.com/websockets/gateways} */
 @WebSocketGateway({
@@ -26,30 +26,28 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
 
   logger = new Logger(EventsGateway.name);
 
-  private readonly tempRoomName = 'smdk';
-
-  /** @todo 초기화 이후에 실행 */
+  /** @description 초기화 이후에 실행 */
   afterInit() {
     this.logger.log('after init');
   }
 
-  /** @todo 소켓 연결 후 실행 */
+  /** @description 소켓 연결 후 실행 */
   handleConnection(@ConnectedSocket() socket: Socket) {
     this.logger.log(`${socket.id} 소켓 연결되었습니다.`);
   }
 
-  /** @todo  소켓 끊어지면 실행 */
+  /** @description  소켓 끊어지면 실행 */
   handleDisconnect(@ConnectedSocket() socket: Socket) {
     this.logger.log(`${socket.id} 소켓 연결 해제되었습니다.`);
     this.logger.error;
   }
 
-  @SubscribeMessage('join-room')
+  @SubscribeMessage(CHAT_SOCKET_JOIN_ROOM)
   joinRoom(@ConnectedSocket() socket: Socket) {
-    socket.join(this.tempRoomName);
+    socket.join(TEMP_ROOM_NAME);
   }
 
-  @SubscribeMessage('message')
+  @SubscribeMessage(CHAT_SOCKET_HANDLER)
   handleMessage(@ConnectedSocket() socket: Socket, @MessageBody() message: string) {
     const newChatData = {
       content: message,
@@ -58,7 +56,7 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
       milliSeconds: '1684113481000',
     };
 
-    socket.to(this.tempRoomName).emit('message', newChatData);
+    socket.to(TEMP_ROOM_NAME).emit(CHAT_SOCKET_HANDLER, newChatData);
     createFakerChatData(message);
     return newChatData;
   }
